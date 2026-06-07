@@ -1,41 +1,356 @@
-;(function(){
-/* global React, TweaksPanel, useTweaks, TweakSection, TweakRadio, TweakSelect, TweakToggle */
+/* ==========================================================================
+   THREADLINE — Colors & Type
+   The single source of truth for color tokens, type tokens, and semantic
+   styles. Import this file at the top of any artifact:
+       <link rel="stylesheet" href="/colors_and_type.css">
+   ========================================================================== */
 
-// Tweaks panel — exposed via the toolbar Tweaks toggle.
-window.TweaksApp = function TweaksApp() {
-  const [t, setTweak] = useTweaks(window.__TWEAKS);
+/* --- Webfonts ------------------------------------------------------------- */
+/* We self-host where possible; Google Fonts as a fallback during prototyping.
+   See /fonts for any locally bundled files. */
+@import url("https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800&family=Geist:wght@300..800&family=Geist+Mono:wght@300..700&display=swap");
 
-  // Apply tweaks to <body> + :root so non-React things see them.
-  React.useEffect(() => {
-    document.body.classList.remove("density-tight", "density-comfortable", "density-airy");
-    document.body.classList.add("density-" + t.density);
-    document.documentElement.style.setProperty("--font-display", t.displayFont === "Newsreader" ? "Newsreader, 'GT Sectra', serif" : t.displayFont === "Fraunces" ? "Fraunces, Newsreader, serif" : t.displayFont === "Libre" ? "'Libre Caslon Text', Newsreader, serif" : "Newsreader, serif");
-  }, [t.density, t.displayFont]);
-  return /*#__PURE__*/React.createElement(TweaksPanel, {
-    title: "Tweaks"
-  }, /*#__PURE__*/React.createElement(TweakSection, {
-    label: "Density"
-  }), /*#__PURE__*/React.createElement(TweakRadio, {
-    label: "Section padding",
-    value: t.density,
-    options: [{
-      label: "Tight",
-      value: "tight"
-    }, {
-      label: "Comfortable",
-      value: "comfortable"
-    }, {
-      label: "Airy",
-      value: "airy"
-    }],
-    onChange: v => setTweak("density", v)
-  }), /*#__PURE__*/React.createElement(TweakSection, {
-    label: "Display font"
-  }), /*#__PURE__*/React.createElement(TweakSelect, {
-    label: "Headings",
-    value: t.displayFont,
-    options: ["Newsreader", "Fraunces", "Libre"],
-    onChange: v => setTweak("displayFont", v)
-  }));
-};
-})();
+:root {
+  /* ============ COLOR TOKENS ==================================== */
+  /* Primitives — never reference these directly in a component; use the
+     semantic tokens below. */
+  --ink:           #0A0A0A;   /* near-black, primary text on light */
+  --charcoal:      #1F1D1A;   /* off-black, dark surface */
+  --graphite:      #3A3631;   /* secondary text on light */
+  --stone:         #8A8378;   /* tertiary text, hairlines on light */
+  --ash:           #BFB8AC;   /* disabled text on light */
+  --bone:          #E8E2D5;   /* divider / quiet card bg on paper */
+  --paper:         #F5F1EA;   /* warm off-white — primary surface */
+  --paper-2:       #EFEAE0;   /* slightly deeper paper */
+  --white:         #FFFFFF;   /* pure white — for crisp cards */
+
+  /* Inverse neutrals for dark surfaces */
+  --ink-paper:     #F2EDE3;   /* primary text on dark */
+  --ink-paper-2:   #BCB3A4;   /* secondary text on dark */
+  --ink-paper-3:   #6A6358;   /* tertiary text on dark */
+  --ink-line:      #2A2723;   /* hairlines on dark */
+
+  /* Accent — reserved. Cinnabar lives inside the logo and as a focus-ring color.
+     Do not use it as a body text color, as a top-border on cards, as a rule
+     under stats, or to colorize numerals. The brand pop is the logo. */
+  --cinnabar:      #D74227;   /* logo + focus ring only */
+  --cinnabar-deep: #A8311E;   /* hover state for the rare accent button */
+
+  /* Editorial accent — the color used to emphasize a load-bearing word in
+     headlines. Now that the loud uses of cinnabar have been retired (bars,
+     eyebrow nums, underlines, etc.), the accent IS cinnabar — used only as
+     text on the emphasis word and inside the logo. Single source of truth
+     for the accent system; swap this token to change it. */
+  --accent:        var(--cinnabar);
+
+  /* Semantic — reference these in components */
+  --bg:            var(--paper);
+  --bg-elevated:   var(--white);
+  --bg-quiet:      var(--paper-2);
+  --bg-inverse:    var(--ink);
+
+  --fg:            var(--ink);
+  --fg-muted:      var(--graphite);
+  --fg-subtle:     var(--stone);
+  --fg-disabled:   var(--ash);
+  --fg-inverse:    var(--ink-paper);
+  /* fg-accent retained for the rare CTA; almost no component should reach for it. */
+  --fg-accent:     var(--cinnabar);
+
+  --line:          var(--bone);
+  --line-strong:   var(--ink);
+  --line-inverse:  var(--ink-line);
+
+  /* ============ TYPE TOKENS ==================================== */
+  --font-display:  "Newsreader", "Source Serif 4", Georgia, serif;
+  /* The display face uses Newsreader's display optical master (opsz=72).
+     Pinning it here guarantees the live-rendered wordmark, the outlined
+     SVG logo, and any deck-slide headline all share the same letterform. */
+  --font-display-vs: "opsz" 72;
+  --font-sans:     "Geist", "Inter", system-ui, sans-serif;
+  --font-mono:     "Geist Mono", "JetBrains Mono", ui-monospace, monospace;
+
+  /* Scale — editorial, with strong jumps. Designed for both web (16px base)
+     and slide (24px base) use; multiply via --scale on slides. */
+  --scale:         1;
+  --fs-eyebrow:    calc(11px * var(--scale));   /* labels, tags */
+  --fs-caption:    calc(13px * var(--scale));   /* meta, footnotes */
+  --fs-body-sm:    calc(14px * var(--scale));
+  --fs-body:       calc(16px * var(--scale));
+  --fs-body-lg:    calc(18px * var(--scale));
+  --fs-h6:         calc(18px * var(--scale));
+  --fs-h5:         calc(22px * var(--scale));
+  --fs-h4:         calc(28px * var(--scale));
+  --fs-h3:         calc(36px * var(--scale));
+  --fs-h2:         calc(52px * var(--scale));
+  --fs-h1:         calc(72px * var(--scale));
+  --fs-display:    calc(120px * var(--scale));
+
+  /* Line heights — editorial: tight on display, generous on body */
+  --lh-display:    0.95;
+  --lh-heading:    1.05;
+  --lh-body:       1.55;
+  --lh-tight:      1.25;
+
+  /* Tracking */
+  --ls-display:   -0.025em;
+  --ls-heading:   -0.015em;
+  --ls-body:       0em;
+  --ls-eyebrow:    0.16em;     /* uppercase labels */
+  --ls-caps:       0.04em;
+
+  /* ============ SHAPE & ELEVATION =============================== */
+  --radius-0:      0px;       /* default — Threadline is sharp */
+  --radius-1:      2px;       /* subtle */
+  --radius-2:      4px;       /* form fields */
+  --radius-pill:   999px;     /* tags, the rare pill */
+
+  --hairline:      1px;
+  --rule:          1.5px;
+  --rule-strong:   2px;
+  --rule-display:  4px;       /* the "thread" rule */
+
+  /* Shadows are RARE in Threadline. Prefer hairline borders. These exist for
+     overlays, dropdowns, and toasts only. */
+  --shadow-1:      0 1px 0 rgba(10,10,10,0.06), 0 1px 2px rgba(10,10,10,0.04);
+  --shadow-2:      0 8px 24px -8px rgba(10,10,10,0.18);
+  --shadow-overlay:0 24px 64px -16px rgba(10,10,10,0.32);
+
+  /* ============ SPACING ========================================= */
+  /* 4px base. Use semantic names for layout. */
+  --s-1:  4px;
+  --s-2:  8px;
+  --s-3:  12px;
+  --s-4:  16px;
+  --s-5:  24px;
+  --s-6:  32px;
+  --s-7:  48px;
+  --s-8:  64px;
+  --s-9:  96px;
+  --s-10: 128px;
+  --s-11: 192px;
+
+  /* ============ MOTION ========================================== */
+  --ease-in-out:   cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-out:      cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in:       cubic-bezier(0.7, 0, 1, 1);
+  --dur-fast:      120ms;
+  --dur-base:      200ms;
+  --dur-slow:      420ms;
+
+  /* ============ LAYOUT ========================================= */
+  --max-w-prose:   68ch;
+  --max-w-content: 1080px;
+  --max-w-page:    1280px;
+  --gutter:        24px;
+}
+
+/* --- Base ---------------------------------------------------------------- */
+html, body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  font-feature-settings: "ss01", "ss02", "cv11";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ==========================================================================
+   SEMANTIC TYPOGRAPHY
+   Use these classes (or apply the styles inline). Display elements use the
+   serif; body and UI use the sans.
+   ========================================================================== */
+
+.t-display, h1.display {
+  font-family: var(--font-display);
+  font-size: var(--fs-display);
+  font-weight: 500;
+  line-height: var(--lh-display);
+  letter-spacing: var(--ls-display);
+  text-wrap: balance;
+}
+
+.t-h1, h1 {
+  font-family: var(--font-display);
+  font-size: var(--fs-h1);
+  font-weight: 500;
+  line-height: var(--lh-display);
+  letter-spacing: var(--ls-display);
+  text-wrap: balance;
+  margin: 0 0 var(--s-5);
+}
+
+.t-h2, h2 {
+  font-family: var(--font-display);
+  font-size: var(--fs-h2);
+  font-weight: 500;
+  line-height: var(--lh-heading);
+  letter-spacing: var(--ls-heading);
+  text-wrap: balance;
+  margin: 0 0 var(--s-5);
+}
+
+.t-h3, h3 {
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  font-weight: 500;
+  line-height: var(--lh-heading);
+  letter-spacing: var(--ls-heading);
+  text-wrap: balance;
+  margin: 0 0 var(--s-4);
+}
+
+.t-h4, h4 {
+  font-family: var(--font-sans);
+  font-size: var(--fs-h4);
+  font-weight: 600;
+  line-height: var(--lh-tight);
+  letter-spacing: -0.01em;
+  margin: 0 0 var(--s-3);
+}
+
+.t-h5, h5 {
+  font-family: var(--font-sans);
+  font-size: var(--fs-h5);
+  font-weight: 600;
+  line-height: var(--lh-tight);
+  margin: 0 0 var(--s-3);
+}
+
+.t-h6, h6 {
+  font-family: var(--font-sans);
+  font-size: var(--fs-h6);
+  font-weight: 600;
+  line-height: var(--lh-tight);
+  margin: 0 0 var(--s-2);
+}
+
+.t-italic-display {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+}
+
+.t-body, p {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--fg);
+  margin: 0 0 var(--s-4);
+  max-width: var(--max-w-prose);
+}
+
+.t-body-lg {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body-lg);
+  line-height: 1.5;
+  color: var(--fg);
+}
+
+.t-body-sm {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body-sm);
+  line-height: 1.5;
+  color: var(--fg-muted);
+}
+
+.t-caption {
+  font-family: var(--font-sans);
+  font-size: var(--fs-caption);
+  line-height: 1.45;
+  color: var(--fg-subtle);
+}
+
+.t-eyebrow {
+  font-family: var(--font-sans);
+  font-size: var(--fs-eyebrow);
+  font-weight: 600;
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+  color: var(--fg-subtle);
+}
+
+.t-mono, code, kbd, samp {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  font-feature-settings: "ss02";
+}
+
+/* The "lede" — used for intro paragraphs in essays and case studies.
+   Newsreader at body+, italic optional. */
+.t-lede {
+  font-family: var(--font-display);
+  font-size: calc(22px * var(--scale));
+  line-height: 1.4;
+  font-weight: 400;
+  color: var(--fg);
+  text-wrap: balance;
+}
+
+/* "Pull quote" treatment */
+.t-pullquote {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: calc(36px * var(--scale));
+  line-height: 1.2;
+  letter-spacing: var(--ls-heading);
+  color: var(--fg);
+  text-wrap: balance;
+}
+
+/* Inline accents. Cinnabar text is reserved — almost never reach for .t-accent.
+   Use italic display (.t-italic-display) for editorial emphasis instead. */
+.t-accent { color: var(--fg-accent); }
+.t-strike { text-decoration: line-through; text-decoration-thickness: 2px; color: var(--fg-subtle); }
+
+/* Editorial emphasis. The accent on a load-bearing word is a single muted
+   color — not italic, not red, not underlined. Drop the class on a span
+   inside a headline. Swap --accent in :root to change it system-wide; see
+   preview/emphasis-options.html for the palette. */
+.t-thread {
+  color: var(--accent);
+}
+
+/* ==========================================================================
+   DARK SURFACES
+   Apply .surface-dark to a section to invert. Threadline frequently mixes
+   dark and light blocks; this is the canonical inversion.
+   ========================================================================== */
+.surface-dark {
+  background: var(--ink);
+  color: var(--fg-inverse);
+  --bg: var(--ink);
+  --bg-elevated: var(--charcoal);
+  --bg-quiet: var(--charcoal);
+  --fg: var(--ink-paper);
+  --fg-muted: var(--ink-paper-2);
+  --fg-subtle: var(--ink-paper-3);
+  --fg-disabled: #4a4540;
+  --line: var(--ink-line);
+  --line-strong: var(--ink-paper);
+}
+
+.surface-paper { background: var(--paper); color: var(--ink); }
+.surface-bone  { background: var(--bone); color: var(--ink); }
+.surface-white { background: var(--white); color: var(--ink); }
+
+/* Selection */
+::selection { background: var(--ink); color: var(--paper); }
+
+/* Force Newsreader's opsz=72 (display optical master) on every place we use
+   the display face. This guarantees live HTML and the outlined SVG logos all
+   share the same letterform — the contrast you see in the wordmark file is
+   exactly what you get in <h1>, .t-display, .t-italic-display, etc. */
+.t-display, h1.display,
+.t-h1, h1,
+.t-h2, h2,
+.t-h3, h3,
+.t-italic-display,
+.t-lede,
+.t-pullquote {
+  font-variation-settings: var(--font-display-vs);
+}
+.surface-dark ::selection { background: var(--ink-paper); color: var(--ink); }
