@@ -1,18 +1,27 @@
 {
   "common": {
     "email": "hello@threadlineconsulting.co",
-    "phone": "205-335-5818",
+    "phone": "513-544-5352",
     "office": "Cambridge, MA",
     "footerBlurb": "AI consulting, across every industry. Built out of MIT."
   },
   "home": {
-    "heroEyebrow": "AI adoption consulting · every industry",
-    "heroTitleBefore": "The ",
-    "heroTitleHighlight": "people",
-    "heroTitleAfter": " make the rollout.",
-    "heroLede": "Most AI rollouts don't stall because the technology is bad. They stall because nobody planned for how people would actually use it. That's the part we help you get right — before, during, and after the tools go in.",
-    "failuresTitle": "Where it usually goes wrong.",
+    "positionRows": [
+      {
+        "label": "We don't",
+        "body": "We don't pick your vendors, run the integration, write your prompts, or build the model. Plenty of firms already do that well."
+      },
+      {
+        "label": "We do",
+        "body": "We sit with your leadership team, help them decide which workflows to push on and which to drop, and find out whether people are really using what you've already bought. You get that back in writing every month."
+      },
+      {
+        "label": "Why it works",
+        "body": "Once the people side is sorted out — who owns each workflow, who's accountable for the change, who acts on what the tools produce — the technology decisions tend to get a lot easier."
+      }
+    ],
     "failuresIntro": "We've sat through a lot of stalled pilots, across retail, software, telecom, and healthcare. The software almost always worked fine. A few of the same things went wrong instead.",
+    "closerSub": "A 30-minute call with the partners. No pitch deck.",
     "failures": [
       {
         "num": "01",
@@ -33,22 +42,13 @@
         "symptom": "The renewal is basically a guess."
       }
     ],
+    "heroEyebrow": "AI adoption consulting · every industry",
     "positionTitle": "We're not an implementation partner.",
-    "positionRows": [
-      {
-        "label": "We don't",
-        "body": "We don't pick your vendors, run the integration, write your prompts, or build the model. Plenty of firms already do that well."
-      },
-      {
-        "label": "We do",
-        "body": "We sit with your leadership team, help them decide which workflows to push on and which to drop, and find out whether people are really using what you've already bought. You get that back in writing every month."
-      },
-      {
-        "label": "Why it works",
-        "body": "Once the people side is sorted out — who owns each workflow, who's accountable for the change, who acts on what the tools produce — the technology decisions tend to get a lot easier."
-      }
-    ],
+    "failuresTitle": "Where it usually goes wrong.",
+    "heroLede": "Most AI rollouts don't stall because the technology is bad. They stall because nobody planned for how people would actually use it. That's the part we help you get right — before, during, and after the tools go in.",
+    "heroTitleHighlight": "people",
+    "heroTitleBefore": "The ",
     "closerTitle": "Want to talk it through?",
-    "closerSub": "A 30-minute call with the partners. No pitch deck."
+    "heroTitleAfter": " make the rollout."
   }
 }
