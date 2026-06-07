@@ -378,6 +378,9 @@ body.density-airy { --section-pad-y: 176px; }
 .field label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--fg-subtle); }
 .field input, .field select, .field textarea { font-family: var(--font-sans); font-size: 15px; padding: 12px 14px; border: 1px solid var(--bone); background: var(--white); color: var(--ink); border-radius: 4px; outline: none; resize: vertical; }
 .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--ink); box-shadow: 0 0 0 2px var(--cinnabar); }
+.field.has-error input, .field.has-error select, .field.has-error textarea { border-color: var(--cinnabar); }
+.field-error { font-family: var(--font-sans); font-size: 12px; line-height: 1.4; color: var(--cinnabar); }
+.form-actions .form-hint { transition: color 120ms; }
 .form-actions { display: flex; align-items: center; gap: 24px; margin-top: 8px; flex-wrap: wrap; }
 .form-hint { font-family: var(--font-mono); font-size: 11px; color: var(--fg-subtle); letter-spacing: 0.06em; }
 .contact-success { padding: 48px; border: 1px solid var(--ink); background: var(--white); }

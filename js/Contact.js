@@ -7,6 +7,7 @@ window.ContactPage = function ContactPage({
   navigate
 }) {
   const [submitted, setSubmitted] = useState(false);
+  const [errors, setErrors] = useState({});
   const empty = {
     name: "",
     role: "",
@@ -16,10 +17,23 @@ window.ContactPage = function ContactPage({
     note: ""
   };
   const [form, setForm] = useState(empty);
+  const REQUIRED = {
+    name: "Please add your name.",
+    role: "Please add your role.",
+    company: "Please add your company.",
+    note: "Please tell us a bit about where you are."
+  };
   function update(k, v) {
     setForm({
       ...form,
       [k]: v
+    });
+    if (errors[k]) setErrors(function (prev) {
+      const next = {
+        ...prev
+      };
+      delete next[k];
+      return next;
     });
   }
   function encode(data) {
@@ -29,6 +43,15 @@ window.ContactPage = function ContactPage({
   }
   function submit(e) {
     e.preventDefault();
+    const missing = {};
+    Object.keys(REQUIRED).forEach(function (k) {
+      if (!form[k] || !form[k].trim()) missing[k] = REQUIRED[k];
+    });
+    if (Object.keys(missing).length) {
+      setErrors(missing);
+      return;
+    }
+    setErrors({});
     fetch("/", {
       method: "POST",
       headers: {
@@ -36,6 +59,7 @@ window.ContactPage = function ContactPage({
       },
       body: encode({
         "form-name": "contact",
+        "bot-field": "",
         ...form
       })
     }).then(function (r) {
@@ -135,31 +159,34 @@ window.ContactPage = function ContactPage({
   }, /*#__PURE__*/React.createElement("div", {
     className: "form-row form-row-2"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "field"
+    className: "field" + (errors.name ? " has-error" : "")
   }, /*#__PURE__*/React.createElement("label", null, "Your name"), /*#__PURE__*/React.createElement("input", {
     value: form.name,
     onChange: e => update("name", e.target.value),
-    placeholder: "Mira Patel",
-    required: true
-  })), /*#__PURE__*/React.createElement("div", {
-    className: "field"
+    placeholder: "Mira Patel"
+  }), errors.name && /*#__PURE__*/React.createElement("span", {
+    className: "field-error"
+  }, errors.name)), /*#__PURE__*/React.createElement("div", {
+    className: "field" + (errors.role ? " has-error" : "")
   }, /*#__PURE__*/React.createElement("label", null, "Role"), /*#__PURE__*/React.createElement("input", {
     value: form.role,
     onChange: e => update("role", e.target.value),
-    placeholder: "CEO",
-    required: true
-  }))), /*#__PURE__*/React.createElement("div", {
+    placeholder: "CEO"
+  }), errors.role && /*#__PURE__*/React.createElement("span", {
+    className: "field-error"
+  }, errors.role))),/*#__PURE__*/React.createElement("div", {
     className: "form-row form-row-2"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "field"
+    className: "field" + (errors.company ? " has-error" : "")
   }, /*#__PURE__*/React.createElement("label", null, "Company"), /*#__PURE__*/React.createElement("input", {
     value: form.company,
     onChange: e => update("company", e.target.value),
-    placeholder: "Acme Inc.",
-    required: true
-  })), /*#__PURE__*/React.createElement("div", {
+    placeholder: "Acme Inc."
+  }), errors.company && /*#__PURE__*/React.createElement("span", {
+    className: "field-error"
+  }, errors.company)), /*#__PURE__*/React.createElement("div", {
     className: "field"
-  }, /*#__PURE__*/React.createElement("label", null, "Annual revenue"), /*#__PURE__*/React.createElement("select", {
+  }, /*#__PURE__*/React.createElement("label", null, "Annual revenue (optional)"), /*#__PURE__*/React.createElement("select", {
     value: form.revenue,
     onChange: e => update("revenue", e.target.value)
   }, /*#__PURE__*/React.createElement("option", {
@@ -170,19 +197,21 @@ window.ContactPage = function ContactPage({
     value: form.interest,
     onChange: e => update("interest", e.target.value)
   }, /*#__PURE__*/React.createElement("option", null, "The monthly retainer ($2,000 / mo)"), /*#__PURE__*/React.createElement("option", null, "The expert network ($450 / hr, retainer clients)"), /*#__PURE__*/React.createElement("option", null, "Not sure yet \u2014 just a conversation"))), /*#__PURE__*/React.createElement("div", {
-    className: "field"
+    className: "field" + (errors.note ? " has-error" : "")
   }, /*#__PURE__*/React.createElement("label", null, "A bit about where you are"), /*#__PURE__*/React.createElement("textarea", {
     rows: "5",
     value: form.note,
     onChange: e => update("note", e.target.value),
     placeholder: "We've put AI tools in front of a few teams, but we honestly don't know if people are using them or if they're helping. We could use an outside read."
-  })), /*#__PURE__*/React.createElement("div", {
+  }), errors.note && /*#__PURE__*/React.createElement("span", {
+    className: "field-error"
+  }, errors.note)), /*#__PURE__*/React.createElement("div", {
     className: "form-actions"
   }, /*#__PURE__*/React.createElement(Btn, {
     variant: "primary",
     arrow: true
   }, "Send"), /*#__PURE__*/React.createElement("span", {
     className: "form-hint"
-  }, "We read every email."))))));
+  }, Object.keys(errors).length ? "Please fill in the highlighted fields." : "We read every email."))))));
 };
 })();
