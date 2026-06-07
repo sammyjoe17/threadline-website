@@ -1,0 +1,7 @@
+# Threadline — Netlify build settings
+# The site is plain static files (HTML/CSS/JS), so there is no build step.
+# Netlify just publishes the repo root exactly as-is.
+
+[build]
+  publish = "."
+  command = ""
