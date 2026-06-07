@@ -15,9 +15,9 @@ function fmtDate(iso) {
   });
 }
 
-// Read the post slug (second hash segment), e.g. #/writing/my-post -> "my-post"
+// Read the post slug (second path segment), e.g. /writing/my-post -> "my-post"
 function currentSlug() {
-  const raw = (window.location.hash || "").replace(/^#\/?/, "").split("?")[0];
+  const raw = window.location.pathname.replace(/^\/+/, "").replace(/\/+$/, "").split("?")[0];
   const parts = raw.split("/");
   return parts[0] === "writing" && parts[1] ? decodeURIComponent(parts[1]) : null;
 }
@@ -28,17 +28,19 @@ window.WritingPage = function WritingPage({
   const posts = (data.posts || []).slice().sort((a, b) => (b.date || "").localeCompare(a.date || ""));
   const [slug, setSlug] = useState(currentSlug());
   useEffect(() => {
-    const onHash = () => setSlug(currentSlug());
-    window.addEventListener("hashchange", onHash);
-    return () => window.removeEventListener("hashchange", onHash);
+    const onPop = () => setSlug(currentSlug());
+    window.addEventListener("popstate", onPop);
+    return () => window.removeEventListener("popstate", onPop);
   }, []);
   const openPost = s => {
-    window.location.hash = "#/writing/" + s;
+    window.history.pushState({}, "", "/writing/" + s);
+    window.dispatchEvent(new PopStateEvent("popstate"));
     setSlug(s);
     window.scrollTo(0, 0);
   };
   const backToList = () => {
-    window.location.hash = "#/writing";
+    window.history.pushState({}, "", "/writing");
+    window.dispatchEvent(new PopStateEvent("popstate"));
     setSlug(null);
     window.scrollTo(0, 0);
   };
@@ -171,7 +173,7 @@ function PostView({
     className: "post-article"
   }, /*#__PURE__*/React.createElement("a", {
     className: "post-back",
-    href: "#/writing",
+    href: "/writing",
     onClick: e => {
       e.preventDefault();
       backToList();
@@ -187,7 +189,7 @@ function PostView({
     }
   }), /*#__PURE__*/React.createElement("a", {
     className: "post-back post-back-foot",
-    href: "#/writing",
+    href: "/writing",
     onClick: e => {
       e.preventDefault();
       backToList();

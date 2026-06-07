@@ -4,17 +4,20 @@ const {
   useState,
   useEffect
 } = React;
-function parseHash() {
-  const raw = (window.location.hash || "").replace(/^#\/?/, "").split("?")[0];
+function parsePath() {
+  const raw = window.location.pathname.replace(/^\/+/, "").replace(/\/+$/, "").split("?")[0];
   const h = raw.split("/")[0]; // first segment is the page; rest (e.g. a post slug) handled by the page
   if (!h || h === "home") return "home";
   // Redirect legacy routes.
   if (h === "work" || h === "method" || h === "services") return "engagement";
   return h;
 }
-function setHash(route) {
-  const h = route === "home" ? "#/" : "#/" + route;
-  if (window.location.hash !== h) window.location.hash = h;
+function go(route) {
+  const p = route === "home" ? "/" : "/" + route;
+  if (window.location.pathname !== p) {
+    window.history.pushState({}, "", p);
+    window.dispatchEvent(new PopStateEvent("popstate"));
+  }
 }
 function HomePage({
   navigate
@@ -28,17 +31,17 @@ function HomePage({
   }));
 }
 function App() {
-  const [route, setRoute] = useState(parseHash());
+  const [route, setRoute] = useState(parsePath());
   useEffect(() => {
-    const onHash = () => {
-      setRoute(parseHash());
+    const onPop = () => {
+      setRoute(parsePath());
       window.scrollTo(0, 0);
     };
-    window.addEventListener("hashchange", onHash);
-    return () => window.removeEventListener("hashchange", onHash);
+    window.addEventListener("popstate", onPop);
+    return () => window.removeEventListener("popstate", onPop);
   }, []);
   const navigate = r => {
-    setHash(r);
+    go(r);
     setRoute(r);
     window.scrollTo({
       top: 0,
@@ -76,6 +79,12 @@ document.body.classList.add("density-" + (window.__TWEAKS.density || "comfortabl
 // Load editable content (managed via the /admin CMS) before first render.
 // Falls back to built-in defaults in each component if the file is missing.
 (async function boot() {
+  // Migrate legacy hash URLs (e.g. /#/contact) to clean paths (/contact)
+  // so old links and bookmarks still land on the right page.
+  if (window.location.hash.indexOf("#/") === 0) {
+    const p = window.location.hash.slice(1).replace(/\/+$/, "") || "/";
+    window.history.replaceState({}, "", p === "" ? "/" : p);
+  }
   const grab = async path => {
     try {
       const res = await fetch(path, {
@@ -86,7 +95,7 @@ document.body.classList.add("density-" + (window.__TWEAKS.density || "comfortabl
       return {};
     }
   };
-  const [site, writing] = await Promise.all([grab("content/site.json"), grab("content/writing.json")]);
+  const [site, writing] = await Promise.all([grab("/content/site.json"), grab("/content/writing.json")]);
   window.SITE = site || {};
   window.SITE.writing = writing || {};
   ReactDOM.createRoot(document.getElementById("root")).render(/*#__PURE__*/React.createElement(App, null));

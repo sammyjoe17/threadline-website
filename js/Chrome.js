@@ -56,20 +56,20 @@ window.Header = function Header({
     className: "site-header-inner"
   }, /*#__PURE__*/React.createElement("a", {
     className: "site-brand",
-    href: "#/",
+    href: "/",
     onClick: e => {
       e.preventDefault();
       go("home");
     }
   }, /*#__PURE__*/React.createElement("img", {
-    src: "assets/logo-wordmark.svg",
+    src: "/assets/logo-wordmark.svg",
     alt: "Threadline"
   })), /*#__PURE__*/React.createElement("nav", {
     className: "site-nav"
   }, nav.slice(0, 3).map(n => /*#__PURE__*/React.createElement("a", {
     key: n.id,
     className: "site-nav-link" + (route === n.id ? " is-active" : ""),
-    href: "#/" + n.id,
+    href: "/" + n.id,
     onClick: e => {
       e.preventDefault();
       go(n.id);
@@ -78,7 +78,7 @@ window.Header = function Header({
     className: "site-header-cta"
   }, /*#__PURE__*/React.createElement("a", {
     className: "btn btn-primary btn-sm",
-    href: "#/contact",
+    href: "/contact",
     onClick: e => {
       e.preventDefault();
       go("contact");
@@ -97,7 +97,7 @@ window.Header = function Header({
   }, nav.map((n, i) => /*#__PURE__*/React.createElement("a", {
     key: n.id,
     className: "mobile-menu-link" + (route === n.id ? " is-active" : ""),
-    href: "#/" + n.id,
+    href: "/" + n.id,
     style: {
       transitionDelay: (menuOpen ? 0.06 + i * 0.05 : 0) + "s"
     },
@@ -135,7 +135,7 @@ window.Footer = function Footer({
   }, /*#__PURE__*/React.createElement("div", {
     className: "footer-brand"
   }, /*#__PURE__*/React.createElement("img", {
-    src: "assets/logo-wordmark-inverse.svg",
+    src: "/assets/logo-wordmark-inverse.svg",
     alt: "Threadline"
   }), /*#__PURE__*/React.createElement("p", {
     className: "footer-blurb"
@@ -144,25 +144,25 @@ window.Footer = function Footer({
   }, /*#__PURE__*/React.createElement("div", {
     className: "eyebrow eyebrow-dark"
   }, "Firm"), /*#__PURE__*/React.createElement("ul", null, /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("a", {
-    href: "#/engagement",
+    href: "/engagement",
     onClick: e => {
       e.preventDefault();
       navigate("engagement");
     }
   }, "Engagement")), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("a", {
-    href: "#/about",
+    href: "/about",
     onClick: e => {
       e.preventDefault();
       navigate("about");
     }
   }, "About")), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("a", {
-    href: "#/writing",
+    href: "/writing",
     onClick: e => {
       e.preventDefault();
       navigate("writing");
     }
   }, "Writing")), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("a", {
-    href: "#/contact",
+    href: "/contact",
     onClick: e => {
       e.preventDefault();
       navigate("contact");
@@ -174,7 +174,7 @@ window.Footer = function Footer({
   }, "Contact"), /*#__PURE__*/React.createElement("ul", null, /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("a", {
     href: "mailto:" + email
   }, email)), /*#__PURE__*/React.createElement("li", null, phone), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("a", {
-    href: "#/contact",
+    href: "/contact",
     onClick: e => {
       e.preventDefault();
       navigate("contact");

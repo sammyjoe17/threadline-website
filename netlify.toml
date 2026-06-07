@@ -5,3 +5,11 @@
 [build]
   publish = "."
   command = ""
+
+# Single-page app: serve index.html for any path that isn't a real file,
+# so clean URLs like /contact and /writing/<slug> work on direct load and
+# refresh. Existing files (assets, /admin, JS, CSS) are served as-is.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

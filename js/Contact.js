@@ -126,7 +126,7 @@ window.ContactPage = function ContactPage({
       e.preventDefault();
       navigate("engagement");
     },
-    href: "#/engagement",
+    href: "/engagement",
     style: {
       textDecoration: "underline",
       textUnderlineOffset: 4
@@ -136,7 +136,7 @@ window.ContactPage = function ContactPage({
       e.preventDefault();
       navigate("about");
     },
-    href: "#/about",
+    href: "/about",
     style: {
       textDecoration: "underline",
       textUnderlineOffset: 4
