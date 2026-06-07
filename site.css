@@ -1403,6 +1403,8 @@ body.density-airy { --section-pad-y: 176px; }
     overflow-y: auto;
     visibility: hidden;
     transition: visibility 280ms;
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden; backface-visibility: hidden;
   }
   .mobile-menu.is-open { visibility: visible; }
 }
