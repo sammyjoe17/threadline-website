@@ -1,0 +1,27 @@
+{
+  "heroEyebrow": "Who we are",
+  "heroTitle": "Built out of MIT.",
+  "heroLede": "Threadline was started by people who built and shipped AI inside large companies before leaving to start the firm. We came up through MIT, where the research and the day-to-day reality of using these tools tend to meet.",
+  "originLabel": "What shapes us",
+  "origin": [
+    { "k": "MIT", "body": "Where we started, and where a lot of our research network still is. We stay close to the labs and the people we came up with." },
+    { "k": "Every industry", "body": "We work across retail, software, telecom, and healthcare — wherever people are trying to make AI stick. The hard part is usually the same; the specific workflows are what change." },
+    { "k": "Operators first", "body": "The partners working with you have shipped AI inside real organizations and have sat where you're sitting. That's the perspective we bring — the one those rooms usually lacked." }
+  ],
+  "foundingLabel": "A founding note",
+  "foundingTitle": "Why we started it.",
+  "foundingBody": [
+    "Each of us had run an AI pilot inside a large company and watched it stall — not because the technology was bad, but because no one had figured out who was responsible for changing how people worked.",
+    "The vendors kept talking about the model. So did the board. Meanwhile the team had quietly gone back to the old spreadsheet, and the contract got renewed anyway.",
+    "Threadline is the firm we wish we'd been able to call. We work alongside your leadership for a year, ask the people doing the work what's really happening, and tell you each month, in writing, whether it's working."
+  ],
+  "teamLabel": "Team",
+  "teamTitle": "Small on purpose.",
+  "teamLede": "The partners who start your engagement are the ones who stay on it — we don't hand the work down to juniors. We'll name the team here as the firm grows.",
+  "hiring": [
+    { "num": "01", "label": "If you've run a team", "body": "You've taken a team through an AI rollout — in any function, any industry — and actually got the tool into daily use. We'd like to hear from you." },
+    { "num": "02", "label": "If you work in research", "body": "You're at MIT or a similar lab, working on the kind of applied ML that reaches real users. Tell us what you're working on." }
+  ],
+  "closerLabel": "Next step",
+  "closerTitle": "Want to talk it through?"
+}

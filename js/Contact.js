@@ -6,6 +6,8 @@ const {
 window.ContactPage = function ContactPage({
   navigate
 }) {
+  const C = window.SITE && window.SITE.contact || {};
+  const CC = window.SITE && window.SITE.common || {};
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState({});
   const empty = {
@@ -77,29 +79,29 @@ window.ContactPage = function ContactPage({
     className: "contact-left"
   }, /*#__PURE__*/React.createElement(Eyebrow, {
     num: "01"
-  }, "Get in touch"), /*#__PURE__*/React.createElement("h1", {
+  }, C.heroEyebrow || "Get in touch"), /*#__PURE__*/React.createElement("h1", {
     className: "section-title-lg"
-  }, "Tell us where AI is stuck at your company."), /*#__PURE__*/React.createElement("p", {
+  }, C.heroTitle || "Tell us where AI is stuck at your company."), /*#__PURE__*/React.createElement("p", {
     className: "lede"
-  }, "We'll set up a 30-minute call. If the retainer makes sense, we go from there. If you're after an expert call or a workshop, same. And if we're not the right people, we'll tell you."), /*#__PURE__*/React.createElement("div", {
+  }, C.heroLede || "We'll set up a 30-minute call. If the retainer makes sense, we go from there. If you're after an expert call or a workshop, same. And if we're not the right people, we'll tell you."), /*#__PURE__*/React.createElement("div", {
     className: "contact-meta"
   }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", {
     className: "meta-k"
   }, "Office"), /*#__PURE__*/React.createElement("span", {
     className: "meta-v"
-  }, "Cambridge, MA")), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", {
+  }, CC.office || "Cambridge, MA")), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", {
     className: "meta-k"
   }, "Email"), /*#__PURE__*/React.createElement("span", {
     className: "meta-v"
-  }, "hello@threadlineconsulting.co")), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", {
+  }, CC.email || "hello@threadlineconsulting.co")), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", {
     className: "meta-k"
   }, "Phone"), /*#__PURE__*/React.createElement("span", {
     className: "meta-v"
-  }, "205-335-5818")), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", {
+  }, CC.phone || "205-335-5818")), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", {
     className: "meta-k"
   }, "Founded"), /*#__PURE__*/React.createElement("span", {
     className: "meta-v"
-  }, "2025, out of MIT"))), /*#__PURE__*/React.createElement("div", {
+  }, C.foundedValue || "2025, out of MIT"))), /*#__PURE__*/React.createElement("div", {
     style: {
       marginTop: 48,
       paddingTop: 24,
@@ -112,7 +114,7 @@ window.ContactPage = function ContactPage({
     }
   }, /*#__PURE__*/React.createElement("span", {
     className: "eyebrow-num"
-  }, "02"), /*#__PURE__*/React.createElement("span", null, "If you're not sure yet")), /*#__PURE__*/React.createElement("p", {
+  }, "02"), /*#__PURE__*/React.createElement("span", null, C.notSureLabel || "If you're not sure yet")), /*#__PURE__*/React.createElement("p", {
     style: {
       fontFamily: "var(--font-sans)",
       fontSize: 16,
@@ -121,7 +123,7 @@ window.ContactPage = function ContactPage({
       maxWidth: "44ch",
       margin: 0
     }
-  }, "Have a look at the ", /*#__PURE__*/React.createElement("a", {
+  }, C.notSureBefore || "Have a look at the ", /*#__PURE__*/React.createElement("a", {
     onClick: e => {
       e.preventDefault();
       navigate("engagement");
@@ -131,7 +133,7 @@ window.ContactPage = function ContactPage({
       textDecoration: "underline",
       textUnderlineOffset: 4
     }
-  }, "engagement page"), " and the ", /*#__PURE__*/React.createElement("a", {
+  }, C.notSureLink1 || "engagement page"), C.notSureMid || " and the ", /*#__PURE__*/React.createElement("a", {
     onClick: e => {
       e.preventDefault();
       navigate("about");
@@ -141,19 +143,19 @@ window.ContactPage = function ContactPage({
       textDecoration: "underline",
       textUnderlineOffset: 4
     }
-  }, "about"), " page first if you like. Either way, feel free to write \u2014 we read every email."))), /*#__PURE__*/React.createElement("div", {
+  }, C.notSureLink2 || "about"), C.notSureAfter || " page first if you like. Either way, feel free to write \u2014 we read every email."))), /*#__PURE__*/React.createElement("div", {
     className: "contact-right"
   }, submitted ? /*#__PURE__*/React.createElement("div", {
     className: "contact-success"
   }, /*#__PURE__*/React.createElement("div", {
     className: "thread-rule"
-  }), /*#__PURE__*/React.createElement("h3", null, "Got it."), /*#__PURE__*/React.createElement("p", null, "Thanks for writing \u2014 we read every email and we'll get back to you. If we're not the right fit, we'll tell you that too."), /*#__PURE__*/React.createElement(Btn, {
+  }), /*#__PURE__*/React.createElement("h3", null, C.successHeading || "Got it."), /*#__PURE__*/React.createElement("p", null, C.successBody || "Thanks for writing \u2014 we read every email and we'll get back to you. If we're not the right fit, we'll tell you that too."), /*#__PURE__*/React.createElement(Btn, {
     variant: "ghost",
     onClick: () => {
       setSubmitted(false);
       setForm(empty);
     }
-  }, "Send another \u2192")) : /*#__PURE__*/React.createElement("form", {
+  }, C.successAgain || "Send another \u2192")) : /*#__PURE__*/React.createElement("form", {
     className: "contact-form",
     onSubmit: submit
   }, /*#__PURE__*/React.createElement("div", {

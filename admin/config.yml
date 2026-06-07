@@ -1,199 +1,527 @@
+# Decap CMS configuration — one collection per page.
 backend:
   name: git-gateway
   branch: main
-
-# Where uploaded images would go, if you add any later.
-media_folder: "assets/uploads"
-public_folder: "/assets/uploads"
-
-# Friendlier wording in the dashboard.
+media_folder: assets/uploads
+public_folder: /assets/uploads
 publish_mode: simple
-
 collections:
-  - name: "site"
-    label: "Website content"
-    files:
-      - name: "content"
-        label: "Site content"
-        file: "content/site.json"
-        format: "json"
-        fields:
-          - label: "Contact & footer"
-            name: "common"
-            widget: "object"
-            fields:
-              - { label: "Email address", name: "email", widget: "string" }
-              - { label: "Phone number", name: "phone", widget: "string" }
-              - { label: "Office", name: "office", widget: "string" }
-              - { label: "Footer blurb", name: "footerBlurb", widget: "text" }
-
-          - label: "Home page"
-            name: "home"
-            widget: "object"
-            fields:
-              - { label: "Hero — eyebrow (small line above headline)", name: "heroEyebrow", widget: "string" }
-              - { label: "Hero headline — text before highlighted word", name: "heroTitleBefore", widget: "string" }
-              - { label: "Hero headline — highlighted word", name: "heroTitleHighlight", widget: "string" }
-              - { label: "Hero headline — text after highlighted word", name: "heroTitleAfter", widget: "string" }
-              - { label: "Hero paragraph", name: "heroLede", widget: "text" }
-
-              - { label: "“Why rollouts fail” — section title", name: "failuresTitle", widget: "string" }
-              - { label: "“Why rollouts fail” — intro paragraph", name: "failuresIntro", widget: "text" }
-              - label: "Failure modes (the three cards)"
-                name: "failures"
-                widget: "list"
-                fields:
-                  - { label: "Number (e.g. 01)", name: "num", widget: "string" }
-                  - { label: "Heading", name: "heading", widget: "string" }
-                  - { label: "Body", name: "body", widget: "text" }
-                  - { label: "Symptom line", name: "symptom", widget: "string" }
-
-              - { label: "Positioning — section title", name: "positionTitle", widget: "string" }
-              - label: "Positioning rows"
-                name: "positionRows"
-                widget: "list"
-                fields:
-                  - { label: "Label (left column)", name: "label", widget: "string" }
-                  - { label: "Body (right column)", name: "body", widget: "text" }
-
-              - { label: "Closing — title", name: "closerTitle", widget: "string" }
-              - { label: "Closing — subtitle", name: "closerSub", widget: "string" }
-
-          - label: "Engagement page"
-            name: "engagement"
-            widget: "object"
-            collapsed: true
-            fields:
-              - { label: "Hero — eyebrow", name: "heroEyebrow", widget: "string" }
-              - { label: "Hero — headline", name: "heroTitle", widget: "string" }
-              - { label: "Hero — paragraph", name: "heroLede", widget: "text" }
-              - label: "The four offerings (overview rows + section dividers)"
-                name: "lines"
-                widget: "list"
-                fields:
-                  - { label: "Number (e.g. 01)", name: "n", widget: "string" }
-                  - { label: "Anchor id — leave as-is", name: "id", widget: "string", hint: "Used for in-page links; don't change" }
-                  - { label: "Title", name: "k", widget: "string" }
-                  - { label: "Overview description", name: "v", widget: "text" }
-                  - { label: "Price / meta (overview)", name: "meta", widget: "string" }
-                  - { label: "Divider meta line", name: "dividerMeta", widget: "string" }
-              - { label: "Retainer — section label", name: "retainerHowLabel", widget: "string" }
-              - { label: "Retainer — heading", name: "retainerH2", widget: "string" }
-              - { label: "Retainer — intro", name: "retainerLede", widget: "text" }
-              - label: "Retainer surfaces (the two cards)"
-                name: "surfaces"
-                widget: "list"
-                fields:
-                  - { label: "Tag", name: "tag", widget: "string" }
-                  - { label: "Heading", name: "h", widget: "string" }
-                  - { label: "Paragraph", name: "p", widget: "text" }
-                  - { label: "Bullet list", name: "list", widget: "list" }
-              - { label: "Cadence — section label", name: "cadenceLabel", widget: "string" }
-              - { label: "Cadence — heading", name: "cadenceH2", widget: "string" }
-              - { label: "Cadence — intro", name: "cadenceLede", widget: "text" }
-              - label: "Cadence steps (the four weeks)"
-                name: "cadenceItems"
-                widget: "list"
-                fields:
-                  - { label: "Week label", name: "week", widget: "string" }
-                  - { label: "Heading", name: "h", widget: "string" }
-                  - { label: "Body", name: "p", widget: "text" }
-              - { label: "Survey — section label", name: "surveyLabel", widget: "string" }
-              - { label: "Survey — heading", name: "surveyH2", widget: "string" }
-              - { label: "Survey — intro", name: "surveyLede", widget: "text" }
-              - label: "Survey questions"
-                name: "surveyQuestions"
-                widget: "list"
-                fields:
-                  - { label: "Number (e.g. Q1)", name: "n", widget: "string" }
-                  - { label: "Heading", name: "h", widget: "string" }
-                  - { label: "Question", name: "p", widget: "text" }
-              - { label: "Memo — section label", name: "memoLabel", widget: "string" }
-              - { label: "Memo — heading", name: "memoH2", widget: "string" }
-              - { label: "Memo card — eyebrow", name: "memoCardEyebrow", widget: "string" }
-              - { label: "Memo card — title", name: "memoCardTitle", widget: "string" }
-              - { label: "Memo card — prepared-by line", name: "memoCardPrep", widget: "string" }
-              - label: "Memo rows"
-                name: "memoRows"
-                widget: "list"
-                fields:
-                  - { label: "Label", name: "k", widget: "string" }
-                  - { label: "Body", name: "v", widget: "text" }
-              - { label: "Pricing — section label", name: "pricingLabel", widget: "string" }
-              - { label: "Pricing — number", name: "priceNum", widget: "string" }
-              - { label: "Pricing — unit", name: "priceUnit", widget: "string" }
-              - { label: "Pricing — blurb", name: "priceBlurb", widget: "text" }
-              - { label: "Pricing — 'Included' label", name: "pricingIncludedLabel", widget: "string" }
-              - { label: "Pricing — Included items", name: "pricingIncluded", widget: "list" }
-              - { label: "Pricing — 'Add-on' label", name: "pricingAddonLabel", widget: "string" }
-              - { label: "Pricing — Add-on items", name: "pricingAddon", widget: "list" }
-              - { label: "Pricing — 'Not included' label", name: "pricingNotLabel", widget: "string" }
-              - { label: "Pricing — Not-included items", name: "pricingNot", widget: "list" }
-              - { label: "Expert network — eyebrow", name: "enEyebrow", widget: "string" }
-              - { label: "Expert network — heading", name: "enH2", widget: "string" }
-              - { label: "Expert network — intro", name: "enLede", widget: "text" }
-              - { label: "Expert — 'traditional' column label", name: "enThemLabel", widget: "string" }
-              - { label: "Expert — 'traditional' items", name: "enThem", widget: "list" }
-              - { label: "Expert — 'Threadline' column label", name: "enUsLabel", widget: "string" }
-              - { label: "Expert — 'Threadline' items", name: "enUs", widget: "list" }
-              - { label: "Expert — rate number", name: "enRateNum", widget: "string" }
-              - { label: "Expert — rate note", name: "enRateP", widget: "text" }
-              - { label: "Expert — 'how it works' label", name: "enHowtoLabel", widget: "string" }
-              - { label: "Expert — how it works steps", name: "enHowto", widget: "list" }
-              - { label: "Expert — table heading (left)", name: "enDomainsHeadWho", widget: "string" }
-              - { label: "Expert — table heading (right)", name: "enDomainsHeadWhat", widget: "string" }
-              - label: "Expert — who you'd talk to (table rows)"
-                name: "enDomains"
-                widget: "list"
-                fields:
-                  - { label: "Who", name: "who", widget: "string" }
-                  - { label: "What you'd get", name: "what", widget: "text" }
-              - { label: "Events — section label", name: "eventsLabel", widget: "string" }
-              - { label: "Events — heading", name: "eventsH2", widget: "string" }
-              - { label: "Events — intro", name: "eventsLede", widget: "text" }
-              - label: "Event cards"
-                name: "eventsCards"
-                widget: "list"
-                fields:
-                  - { label: "Tag", name: "tag", widget: "string" }
-                  - { label: "Heading", name: "h", widget: "string" }
-                  - { label: "Body", name: "p", widget: "text" }
-              - { label: "Events — note", name: "eventsNote", widget: "text" }
-              - { label: "Placement — section label", name: "placementLabel", widget: "string" }
-              - { label: "Placement — heading", name: "placementH2", widget: "string" }
-              - { label: "Placement — intro", name: "placementLede", widget: "text" }
-              - label: "Placement locations"
-                name: "placementGeo"
-                widget: "list"
-                fields:
-                  - { label: "Location", name: "k", widget: "string" }
-                  - { label: "Schools", name: "schools", widget: "string" }
-                  - { label: "Body", name: "p", widget: "text" }
-              - { label: "Placement — roles label", name: "placementRolesLabel", widget: "string" }
-              - { label: "Placement — typical roles", name: "placementRoles", widget: "list" }
-              - { label: "Placement — note", name: "placementNote", widget: "text" }
-              - { label: "Closing — section label", name: "closerLabel", widget: "string" }
-              - { label: "Closing — heading", name: "closerTitle", widget: "string" }
-
-  - name: "writing"
-    label: "Writing / Blog"
-    files:
-      - name: "posts"
-        label: "Blog posts"
-        file: "content/writing.json"
-        format: "json"
-        fields:
-          - { label: "Page eyebrow", name: "introEyebrow", widget: "string" }
-          - { label: "Page headline", name: "title", widget: "string", hint: "Shown at the top of the Writing page" }
-          - { label: "Page intro paragraph", name: "intro", widget: "text" }
-          - label: "Posts"
-            name: "posts"
-            widget: "list"
-            label_singular: "Post"
-            summary: "{{fields.date}} — {{fields.title}}"
-            fields:
-              - { label: "Title", name: "title", widget: "string" }
-              - { label: "Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD", picker_utc: true }
-              - { label: "URL slug", name: "slug", widget: "string", hint: "Lowercase, dashes instead of spaces — this becomes the post's link, e.g. why-pilots-fail" }
-              - { label: "Summary", name: "summary", widget: "text", hint: "One or two sentences shown in the list" }
-              - { label: "Body", name: "body", widget: "markdown" }
+- name: common
+  label: Contact & footer details
+  files:
+  - name: common
+    label: Contact & footer details
+    file: content/common.json
+    format: json
+    fields:
+    - label: Email address
+      name: email
+      widget: string
+    - label: Phone number
+      name: phone
+      widget: string
+    - label: Office
+      name: office
+      widget: string
+    - label: Footer blurb
+      name: footerBlurb
+      widget: text
+- name: home
+  label: Home page
+  files:
+  - name: home
+    label: Home page
+    file: content/home.json
+    format: json
+    fields:
+    - label: Hero — eyebrow (small line above headline)
+      name: heroEyebrow
+      widget: string
+    - label: Hero headline — text before highlighted word
+      name: heroTitleBefore
+      widget: string
+    - label: Hero headline — highlighted word
+      name: heroTitleHighlight
+      widget: string
+    - label: Hero headline — text after highlighted word
+      name: heroTitleAfter
+      widget: string
+    - label: Hero paragraph
+      name: heroLede
+      widget: text
+    - label: “Why rollouts fail” — section title
+      name: failuresTitle
+      widget: string
+    - label: “Why rollouts fail” — intro paragraph
+      name: failuresIntro
+      widget: text
+    - label: Failure modes (the three cards)
+      name: failures
+      widget: list
+      fields:
+      - label: Number (e.g. 01)
+        name: num
+        widget: string
+      - label: Heading
+        name: heading
+        widget: string
+      - label: Body
+        name: body
+        widget: text
+      - label: Symptom line
+        name: symptom
+        widget: string
+    - label: Positioning — section title
+      name: positionTitle
+      widget: string
+    - label: Positioning rows
+      name: positionRows
+      widget: list
+      fields:
+      - label: Label (left column)
+        name: label
+        widget: string
+      - label: Body (right column)
+        name: body
+        widget: text
+    - label: Closing — title
+      name: closerTitle
+      widget: string
+    - label: Closing — subtitle
+      name: closerSub
+      widget: string
+- name: engagement
+  label: Engagement page
+  files:
+  - name: engagement
+    label: Engagement page
+    file: content/engagement.json
+    format: json
+    fields:
+    - label: Hero — eyebrow
+      name: heroEyebrow
+      widget: string
+    - label: Hero — headline
+      name: heroTitle
+      widget: string
+    - label: Hero — paragraph
+      name: heroLede
+      widget: text
+    - label: The four offerings (overview rows + section dividers)
+      name: lines
+      widget: list
+      fields:
+      - label: Number (e.g. 01)
+        name: n
+        widget: string
+      - label: Anchor id — leave as-is
+        name: id
+        widget: string
+        hint: Used for in-page links; don't change
+      - label: Title
+        name: k
+        widget: string
+      - label: Overview description
+        name: v
+        widget: text
+      - label: Price / meta (overview)
+        name: meta
+        widget: string
+      - label: Divider meta line
+        name: dividerMeta
+        widget: string
+    - label: Retainer — section label
+      name: retainerHowLabel
+      widget: string
+    - label: Retainer — heading
+      name: retainerH2
+      widget: string
+    - label: Retainer — intro
+      name: retainerLede
+      widget: text
+    - label: Retainer surfaces (the two cards)
+      name: surfaces
+      widget: list
+      fields:
+      - label: Tag
+        name: tag
+        widget: string
+      - label: Heading
+        name: h
+        widget: string
+      - label: Paragraph
+        name: p
+        widget: text
+      - label: Bullet list
+        name: list
+        widget: list
+    - label: Cadence — section label
+      name: cadenceLabel
+      widget: string
+    - label: Cadence — heading
+      name: cadenceH2
+      widget: string
+    - label: Cadence — intro
+      name: cadenceLede
+      widget: text
+    - label: Cadence steps (the four weeks)
+      name: cadenceItems
+      widget: list
+      fields:
+      - label: Week label
+        name: week
+        widget: string
+      - label: Heading
+        name: h
+        widget: string
+      - label: Body
+        name: p
+        widget: text
+    - label: Survey — section label
+      name: surveyLabel
+      widget: string
+    - label: Survey — heading
+      name: surveyH2
+      widget: string
+    - label: Survey — intro
+      name: surveyLede
+      widget: text
+    - label: Survey questions
+      name: surveyQuestions
+      widget: list
+      fields:
+      - label: Number (e.g. Q1)
+        name: n
+        widget: string
+      - label: Heading
+        name: h
+        widget: string
+      - label: Question
+        name: p
+        widget: text
+    - label: Memo — section label
+      name: memoLabel
+      widget: string
+    - label: Memo — heading
+      name: memoH2
+      widget: string
+    - label: Memo card — eyebrow
+      name: memoCardEyebrow
+      widget: string
+    - label: Memo card — title
+      name: memoCardTitle
+      widget: string
+    - label: Memo card — prepared-by line
+      name: memoCardPrep
+      widget: string
+    - label: Memo rows
+      name: memoRows
+      widget: list
+      fields:
+      - label: Label
+        name: k
+        widget: string
+      - label: Body
+        name: v
+        widget: text
+    - label: Pricing — section label
+      name: pricingLabel
+      widget: string
+    - label: Pricing — number
+      name: priceNum
+      widget: string
+    - label: Pricing — unit
+      name: priceUnit
+      widget: string
+    - label: Pricing — blurb
+      name: priceBlurb
+      widget: text
+    - label: Pricing — 'Included' label
+      name: pricingIncludedLabel
+      widget: string
+    - label: Pricing — Included items
+      name: pricingIncluded
+      widget: list
+    - label: Pricing — 'Add-on' label
+      name: pricingAddonLabel
+      widget: string
+    - label: Pricing — Add-on items
+      name: pricingAddon
+      widget: list
+    - label: Pricing — 'Not included' label
+      name: pricingNotLabel
+      widget: string
+    - label: Pricing — Not-included items
+      name: pricingNot
+      widget: list
+    - label: Expert network — eyebrow
+      name: enEyebrow
+      widget: string
+    - label: Expert network — heading
+      name: enH2
+      widget: string
+    - label: Expert network — intro
+      name: enLede
+      widget: text
+    - label: Expert — 'traditional' column label
+      name: enThemLabel
+      widget: string
+    - label: Expert — 'traditional' items
+      name: enThem
+      widget: list
+    - label: Expert — 'Threadline' column label
+      name: enUsLabel
+      widget: string
+    - label: Expert — 'Threadline' items
+      name: enUs
+      widget: list
+    - label: Expert — rate number
+      name: enRateNum
+      widget: string
+    - label: Expert — rate note
+      name: enRateP
+      widget: text
+    - label: Expert — 'how it works' label
+      name: enHowtoLabel
+      widget: string
+    - label: Expert — how it works steps
+      name: enHowto
+      widget: list
+    - label: Expert — table heading (left)
+      name: enDomainsHeadWho
+      widget: string
+    - label: Expert — table heading (right)
+      name: enDomainsHeadWhat
+      widget: string
+    - label: Expert — who you'd talk to (table rows)
+      name: enDomains
+      widget: list
+      fields:
+      - label: Who
+        name: who
+        widget: string
+      - label: What you'd get
+        name: what
+        widget: text
+    - label: Events — section label
+      name: eventsLabel
+      widget: string
+    - label: Events — heading
+      name: eventsH2
+      widget: string
+    - label: Events — intro
+      name: eventsLede
+      widget: text
+    - label: Event cards
+      name: eventsCards
+      widget: list
+      fields:
+      - label: Tag
+        name: tag
+        widget: string
+      - label: Heading
+        name: h
+        widget: string
+      - label: Body
+        name: p
+        widget: text
+    - label: Events — note
+      name: eventsNote
+      widget: text
+    - label: Placement — section label
+      name: placementLabel
+      widget: string
+    - label: Placement — heading
+      name: placementH2
+      widget: string
+    - label: Placement — intro
+      name: placementLede
+      widget: text
+    - label: Placement locations
+      name: placementGeo
+      widget: list
+      fields:
+      - label: Location
+        name: k
+        widget: string
+      - label: Schools
+        name: schools
+        widget: string
+      - label: Body
+        name: p
+        widget: text
+    - label: Placement — roles label
+      name: placementRolesLabel
+      widget: string
+    - label: Placement — typical roles
+      name: placementRoles
+      widget: list
+    - label: Placement — note
+      name: placementNote
+      widget: text
+    - label: Closing — section label
+      name: closerLabel
+      widget: string
+    - label: Closing — heading
+      name: closerTitle
+      widget: string
+- name: about
+  label: About page
+  files:
+  - name: about
+    label: About page
+    file: content/about.json
+    format: json
+    fields:
+    - label: Hero — eyebrow
+      name: heroEyebrow
+      widget: string
+    - label: Hero — headline
+      name: heroTitle
+      widget: string
+    - label: Hero — paragraph
+      name: heroLede
+      widget: text
+    - label: ‘What shapes us’ — section label
+      name: originLabel
+      widget: string
+    - label: What shapes us (the three items)
+      name: origin
+      widget: list
+      fields:
+      - label: Heading
+        name: k
+        widget: string
+      - label: Body
+        name: body
+        widget: text
+    - label: Founding — section label
+      name: foundingLabel
+      widget: string
+    - label: Founding — heading
+      name: foundingTitle
+      widget: string
+    - label: Founding — paragraphs
+      name: foundingBody
+      widget: list
+    - label: Team — section label
+      name: teamLabel
+      widget: string
+    - label: Team — heading
+      name: teamTitle
+      widget: string
+    - label: Team — intro
+      name: teamLede
+      widget: text
+    - label: Hiring blurbs (the two blocks)
+      name: hiring
+      widget: list
+      fields:
+      - label: Number (e.g. 01)
+        name: num
+        widget: string
+      - label: Heading
+        name: label
+        widget: string
+      - label: Body
+        name: body
+        widget: text
+    - label: Closing — section label
+      name: closerLabel
+      widget: string
+    - label: Closing — heading
+      name: closerTitle
+      widget: string
+- name: contact
+  label: Contact page
+  files:
+  - name: contact
+    label: Contact page
+    file: content/contact.json
+    format: json
+    fields:
+    - label: Hero — eyebrow
+      name: heroEyebrow
+      widget: string
+    - label: Hero — headline
+      name: heroTitle
+      widget: string
+    - label: Hero — paragraph
+      name: heroLede
+      widget: text
+    - label: ‘Founded’ value (meta row)
+      name: foundedValue
+      widget: string
+    - label: ‘Not sure’ — eyebrow label
+      name: notSureLabel
+      widget: string
+    - label: ‘Not sure’ — text before first link
+      name: notSureBefore
+      widget: string
+    - label: ‘Not sure’ — first link text
+      name: notSureLink1
+      widget: string
+    - label: ‘Not sure’ — text between links
+      name: notSureMid
+      widget: string
+    - label: ‘Not sure’ — second link text
+      name: notSureLink2
+      widget: string
+    - label: ‘Not sure’ — text after links
+      name: notSureAfter
+      widget: text
+    - label: Success — heading
+      name: successHeading
+      widget: string
+    - label: Success — body
+      name: successBody
+      widget: text
+    - label: Success — button label
+      name: successAgain
+      widget: string
+- name: writing
+  label: Writing / Blog
+  files:
+  - name: posts
+    label: Blog posts
+    file: content/writing.json
+    format: json
+    fields:
+    - label: Page eyebrow
+      name: introEyebrow
+      widget: string
+    - label: Page headline
+      name: title
+      widget: string
+      hint: Shown at the top of the Writing page
+    - label: Page intro paragraph
+      name: intro
+      widget: text
+    - label: Posts
+      name: posts
+      widget: list
+      label_singular: Post
+      summary: '{{fields.date}} — {{fields.title}}'
+      fields:
+      - label: Title
+        name: title
+        widget: string
+      - label: Date
+        name: date
+        widget: datetime
+        date_format: YYYY-MM-DD
+        time_format: false
+        format: YYYY-MM-DD
+        picker_utc: true
+      - label: URL slug
+        name: slug
+        widget: string
+        hint: Lowercase, dashes instead of spaces — this becomes the post's link,
+          e.g. why-pilots-fail
+      - label: Summary
+        name: summary
+        widget: text
+        hint: One or two sentences shown in the list
+      - label: Body
+        name: body
+        widget: markdown

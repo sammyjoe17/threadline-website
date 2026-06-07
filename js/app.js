@@ -95,9 +95,15 @@ document.body.classList.add("density-" + (window.__TWEAKS.density || "comfortabl
       return {};
     }
   };
-  const [site, writing] = await Promise.all([grab("/content/site.json"), grab("/content/writing.json")]);
-  window.SITE = site || {};
-  window.SITE.writing = writing || {};
+  const [common, home, engagement, about, contact, writing] = await Promise.all([grab("/content/common.json"), grab("/content/home.json"), grab("/content/engagement.json"), grab("/content/about.json"), grab("/content/contact.json"), grab("/content/writing.json")]);
+  window.SITE = {
+    common: common,
+    home: home,
+    engagement: engagement,
+    about: about,
+    contact: contact,
+    writing: writing
+  };
   ReactDOM.createRoot(document.getElementById("root")).render(/*#__PURE__*/React.createElement(App, null));
 })();
 })();
