@@ -1338,6 +1338,8 @@ body.density-airy { --section-pad-y: 176px; }
     grid-template-columns: 1fr;
     gap: 48px;
   }
+  .contact-left, .contact-right { min-width: 0; }
+  .contact-meta .meta-v { min-width: 0; overflow-wrap: anywhere; }
   .ww-grid { grid-template-columns: 1fr 1fr; }
   .ww-item:nth-child(3n) { border-right: 1px solid var(--bone); padding-right: 32px; }
   .ww-item:nth-child(2n) { border-right: 0; padding-right: 0; }
@@ -1437,4 +1439,8 @@ body.density-airy { --section-pad-y: 176px; }
   .featured-body-meta { grid-template-columns: 1fr 1fr; gap: 16px; }
   .case-compare { margin-left: -24px; margin-right: -24px; }
   .case-deliverables { margin-left: -24px; margin-right: -24px; padding-left: 24px; padding-right: 24px; }
+  .contact-form { padding: 28px 20px; }
+  .form-row { flex-direction: column; gap: 20px; }
+  .site-footer-inner { grid-template-columns: 1fr 1fr; gap: 32px 24px; }
+  .footer-brand { grid-column: 1 / -1; }
 }
