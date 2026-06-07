@@ -22,9 +22,28 @@ window.ContactPage = function ContactPage({
       [k]: v
     });
   }
+  function encode(data) {
+    return Object.keys(data).map(function (k) {
+      return encodeURIComponent(k) + "=" + encodeURIComponent(data[k]);
+    }).join("&");
+  }
   function submit(e) {
     e.preventDefault();
-    setSubmitted(true);
+    fetch("/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      body: encode({
+        "form-name": "contact",
+        ...form
+      })
+    }).then(function (r) {
+      if (!r.ok) throw new Error("Form submission failed");
+      setSubmitted(true);
+    }).catch(function () {
+      window.location.href = "mailto:hello@threadlineconsulting.co";
+    });
   }
   return /*#__PURE__*/React.createElement("article", {
     className: "contact"

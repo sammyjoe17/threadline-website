@@ -38,6 +38,18 @@
 <body>
 <div id="root"></div>
 
+<!-- Hidden form so Netlify's deploy bot detects it. The live React form (js/Contact.js) POSTs to "/" with these same field names. -->
+<form name="contact" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
+  <input type="hidden" name="form-name" value="contact" />
+  <input type="text" name="bot-field" />
+  <input type="text" name="name" />
+  <input type="text" name="role" />
+  <input type="text" name="company" />
+  <input type="text" name="revenue" />
+  <input type="text" name="interest" />
+  <textarea name="note"></textarea>
+</form>
+
 <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
