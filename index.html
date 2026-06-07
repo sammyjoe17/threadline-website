@@ -1,57 +1,83 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Threadline — AI consulting, across every industry</title>
-<meta name="description" content="Threadline is the people system around your AI program. A standing SteerCo retainer, expert calls with AI builders, leader workshops in Cambridge, and talent placement from MIT, Harvard &amp; Stanford. Built out of MIT.">
-<link rel="stylesheet" href="colors_and_type.css">
-<link rel="stylesheet" href="site.css">
-<link rel="icon" href="assets/logo-monogram.svg" type="image/svg+xml">
+backend:
+  name: git-gateway
+  branch: main
 
-<!-- Netlify Identity: lets the /admin CMS handle login + invite links -->
-<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-<script>
-  if (window.netlifyIdentity) {
-    window.netlifyIdentity.on("init", function (user) {
-      if (!user) {
-        window.netlifyIdentity.on("login", function () {
-          document.location.href = "/admin/";
-        });
-      }
-    });
-  }
-</script>
+# Where uploaded images would go, if you add any later.
+media_folder: "assets/uploads"
+public_folder: "/assets/uploads"
 
-<!-- Open Graph -->
-<meta property="og:title" content="Threadline — AI consulting, across every industry">
-<meta property="og:description" content="The people system around your AI program. Built out of MIT.">
-<meta property="og:type" content="website">
+# Friendlier wording in the dashboard.
+publish_mode: simple
 
-<script>
-  window.__TWEAKS = {
-    "displayFont": "Newsreader",
-    "density": "comfortable"
-  };
-</script>
-</head>
-<body>
-<div id="root"></div>
+collections:
+  - name: "site"
+    label: "Website content"
+    files:
+      - name: "content"
+        label: "Site content"
+        file: "content/site.json"
+        format: "json"
+        fields:
+          - label: "Contact & footer"
+            name: "common"
+            widget: "object"
+            fields:
+              - { label: "Email address", name: "email", widget: "string" }
+              - { label: "Phone number", name: "phone", widget: "string" }
+              - { label: "Office", name: "office", widget: "string" }
+              - { label: "Footer blurb", name: "footerBlurb", widget: "text" }
 
-<script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+          - label: "Home page"
+            name: "home"
+            widget: "object"
+            fields:
+              - { label: "Hero — eyebrow (small line above headline)", name: "heroEyebrow", widget: "string" }
+              - { label: "Hero headline — text before highlighted word", name: "heroTitleBefore", widget: "string" }
+              - { label: "Hero headline — highlighted word", name: "heroTitleHighlight", widget: "string" }
+              - { label: "Hero headline — text after highlighted word", name: "heroTitleAfter", widget: "string" }
+              - { label: "Hero paragraph", name: "heroLede", widget: "text" }
 
-<script src="js/Bits.js"></script>
-<script src="js/Chrome.js"></script>
-<script src="js/Home.js"></script>
-<script src="js/Engagement.js"></script>
-<script src="js/About.js"></script>
-<script src="js/Writing.js"></script>
-<script src="js/Contact.js"></script>
-<script src="js/tweaks-panel.js"></script>
-<script src="js/TweaksApp.js"></script>
-<script src="js/app.js"></script>
-</body>
-</html>
+              - { label: "“Why rollouts fail” — section title", name: "failuresTitle", widget: "string" }
+              - { label: "“Why rollouts fail” — intro paragraph", name: "failuresIntro", widget: "text" }
+              - label: "Failure modes (the three cards)"
+                name: "failures"
+                widget: "list"
+                fields:
+                  - { label: "Number (e.g. 01)", name: "num", widget: "string" }
+                  - { label: "Heading", name: "heading", widget: "string" }
+                  - { label: "Body", name: "body", widget: "text" }
+                  - { label: "Symptom line", name: "symptom", widget: "string" }
+
+              - { label: "Positioning — section title", name: "positionTitle", widget: "string" }
+              - label: "Positioning rows"
+                name: "positionRows"
+                widget: "list"
+                fields:
+                  - { label: "Label (left column)", name: "label", widget: "string" }
+                  - { label: "Body (right column)", name: "body", widget: "text" }
+
+              - { label: "Closing — title", name: "closerTitle", widget: "string" }
+              - { label: "Closing — subtitle", name: "closerSub", widget: "string" }
+
+  - name: "writing"
+    label: "Writing / Blog"
+    files:
+      - name: "posts"
+        label: "Blog posts"
+        file: "content/writing.json"
+        format: "json"
+        fields:
+          - { label: "Page eyebrow", name: "introEyebrow", widget: "string" }
+          - { label: "Page headline", name: "title", widget: "string", hint: "Shown at the top of the Writing page" }
+          - { label: "Page intro paragraph", name: "intro", widget: "text" }
+          - label: "Posts"
+            name: "posts"
+            widget: "list"
+            label_singular: "Post"
+            summary: "{{fields.date}} — {{fields.title}}"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD", picker_utc: true }
+              - { label: "URL slug", name: "slug", widget: "string", hint: "Lowercase, dashes instead of spaces — this becomes the post's link, e.g. why-pilots-fail" }
+              - { label: "Summary", name: "summary", widget: "text", hint: "One or two sentences shown in the list" }
+              - { label: "Body", name: "body", widget: "markdown" }
