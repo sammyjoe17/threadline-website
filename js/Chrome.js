@@ -90,9 +90,13 @@ window.Header = function Header({
     "aria-label": menuOpen ? "Close menu" : "Open menu",
     "aria-expanded": menuOpen,
     onClick: () => setMenuOpen(v => !v)
-  }, /*#__PURE__*/React.createElement("span", null), /*#__PURE__*/React.createElement("span", null))), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("span", null), /*#__PURE__*/React.createElement("span", null))), /*#__PURE__*/ReactDOM.createPortal(/*#__PURE__*/React.createElement("div", {
     className: "mobile-menu" + (menuOpen ? " is-open" : "")
-  }, /*#__PURE__*/React.createElement("nav", {
+  }, /*#__PURE__*/React.createElement("button", {
+    className: "mobile-menu-close",
+    "aria-label": "Close menu",
+    onClick: () => setMenuOpen(false)
+  }, /*#__PURE__*/React.createElement("span", null), /*#__PURE__*/React.createElement("span", null)), /*#__PURE__*/React.createElement("nav", {
     className: "mobile-menu-nav"
   }, nav.map((n, i) => /*#__PURE__*/React.createElement("a", {
     key: n.id,
@@ -113,7 +117,7 @@ window.Header = function Header({
     className: "mobile-menu-foot"
   }, /*#__PURE__*/React.createElement("a", {
     href: "mailto:" + email
-  }, email), /*#__PURE__*/React.createElement("span", null, phone), /*#__PURE__*/React.createElement("span", null, office))));
+  }, email), /*#__PURE__*/React.createElement("span", null, phone), /*#__PURE__*/React.createElement("span", null, office))), document.body));
 };
 
 // Footer — dark surface with the inverse wordmark.
