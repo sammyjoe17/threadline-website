@@ -55,6 +55,36 @@ function App() {
       }
     });
   }, [route]);
+  useEffect(() => {
+    const meta = {
+      home: {
+        t: "Threadline — AI consulting, across every industry",
+        d: "Threadline is the people system around your AI program — a leadership retainer, expert calls with AI builders, leader workshops, and talent from MIT, Harvard & Stanford. Built out of MIT."
+      },
+      engagement: {
+        t: "Engagement — Threadline",
+        d: "How Threadline works with you: a monthly leadership retainer, expert calls with AI builders, leader workshops, and talent placement."
+      },
+      about: {
+        t: "About — Threadline",
+        d: "Threadline is an AI adoption consultancy built out of MIT — operators who have shipped AI inside large companies and now help leadership make it stick."
+      },
+      writing: {
+        t: "Writing — Threadline",
+        d: "Writing from Threadline on AI adoption, rollouts, and the people side of making AI stick."
+      },
+      contact: {
+        t: "Contact — Threadline",
+        d: "Tell us where AI is stuck at your company and we will set up a 30-minute call with the partners."
+      }
+    };
+    const m = meta[route] || meta.home;
+    document.title = m.t;
+    const desc = document.querySelector('meta[name="description"]');
+    if (desc) desc.setAttribute("content", m.d);
+    const canon = document.querySelector('link[rel="canonical"]');
+    if (canon) canon.setAttribute("href", "https://threadlineconsulting.co" + (route === "home" ? "/" : "/" + route));
+  }, [route]);
   let view;
   if (route === "engagement") view = /*#__PURE__*/React.createElement(EngagementPage, {
     navigate: navigate
