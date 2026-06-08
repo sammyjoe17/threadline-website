@@ -8,16 +8,16 @@
       "id": "retainer",
       "k": "The Retainer",
       "v": "Two leadership sessions a month, plus a survey that tracks how your team is really using AI.",
-      "meta": "$2,000 / mo",
-      "dividerMeta": "$2,000 / mo · month-to-month"
+      "meta": "Month-to-month",
+      "dividerMeta": "Month-to-month"
     },
     {
       "n": "02",
       "id": "expert",
       "k": "Expert Calls",
       "v": "Calls with AI builders and startup operators when you want a fresh take, not the usual playbook.",
-      "meta": "$450 / hr",
-      "dividerMeta": "$450 / hr · retainer clients"
+      "meta": "Retainer clients",
+      "dividerMeta": "Retainer clients only"
     },
     {
       "n": "03",
@@ -142,8 +142,8 @@
     }
   ],
   "pricingLabel": "The engagement",
-  "priceNum": "$2,000",
-  "priceUnit": "per month",
+  "priceNum": "Let's talk",
+  "priceUnit": "scoped to each engagement",
   "priceBlurb": "Month-to-month. No setup fee. Cancel at the end of any month, in writing.",
   "pricingIncludedLabel": "Included",
   "pricingIncluded": [
@@ -154,7 +154,7 @@
   ],
   "pricingAddonLabel": "Add-on",
   "pricingAddon": [
-    "Expert calls at $450/hr (Line 02), priority event seats (Line 03), and talent search (Line 04) — all open to retainer clients."
+    "Expert calls (Line 02), priority event seats (Line 03), and talent search (Line 04) — all open to retainer clients."
   ],
   "pricingNotLabel": "Not included",
   "pricingNot": [
@@ -177,7 +177,7 @@
     "More likely to challenge your approach",
     "Priced so you can use it often"
   ],
-  "enRateNum": "$450 / hr",
+  "enRateNum": "Member rate",
   "enRateP": "Retainer clients only. No minimum, no commitment, no markup beyond the expert's rate.",
   "enHowtoLabel": "How it works",
   "enHowto": [

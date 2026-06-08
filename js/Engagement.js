@@ -11,15 +11,15 @@ window.EngagementPage = function EngagementPage({
     id: "retainer",
     k: "The Retainer",
     v: "Two leadership sessions a month, plus a survey that tracks how your team is really using AI.",
-    meta: "$2,000 / mo",
-    dividerMeta: "$2,000 / mo \xB7 month-to-month"
+    meta: "Month-to-month",
+    dividerMeta: "Month-to-month"
   }, {
     n: "02",
     id: "expert",
     k: "Expert Calls",
     v: "Calls with AI builders and startup operators when you want a fresh take, not the usual playbook.",
-    meta: "$450 / hr",
-    dividerMeta: "$450 / hr \xB7 retainer clients"
+    meta: "Retainer clients",
+    dividerMeta: "Retainer clients only"
   }, {
     n: "03",
     id: "events",
@@ -85,7 +85,7 @@ window.EngagementPage = function EngagementPage({
     className: "ld-title"
   }, lines[0].k), /*#__PURE__*/React.createElement("span", {
     className: "ld-meta"
-  }, lines[0].dividerMeta || "$2,000 / mo \xB7 month-to-month"))), /*#__PURE__*/React.createElement("section", {
+  }, lines[0].dividerMeta || "Month-to-month"))), /*#__PURE__*/React.createElement("section", {
     className: "surfaces"
   }, /*#__PURE__*/React.createElement("div", {
     className: "surfaces-inner"
@@ -260,9 +260,9 @@ window.EngagementPage = function EngagementPage({
     className: "pricing-num"
   }, /*#__PURE__*/React.createElement("span", {
     className: "pricing-num-v"
-  }, C.priceNum || "$2,000"), /*#__PURE__*/React.createElement("span", {
+  }, C.priceNum || "Let's talk"), /*#__PURE__*/React.createElement("span", {
     className: "pricing-num-u"
-  }, C.priceUnit || "per month")), /*#__PURE__*/React.createElement("p", {
+  }, C.priceUnit || "scoped to each engagement")), /*#__PURE__*/React.createElement("p", {
     className: "pricing-blurb"
   }, C.priceBlurb || "Month-to-month. No setup fee. Cancel at the end of any month, in writing.")), /*#__PURE__*/React.createElement("div", {
     className: "pricing-cols"
@@ -278,7 +278,7 @@ window.EngagementPage = function EngagementPage({
     className: "pc-col"
   }, /*#__PURE__*/React.createElement("div", {
     className: "pc-k"
-  }, C.pricingAddonLabel || "Add-on"), /*#__PURE__*/React.createElement("ul", null, (C.pricingAddon && C.pricingAddon.length ? C.pricingAddon : ["Expert calls at $450/hr (Line 02), priority event seats (Line 03), and talent search (Line 04) \u2014 all open to retainer clients."]).map(function (it, i) {
+  }, C.pricingAddonLabel || "Add-on"), /*#__PURE__*/React.createElement("ul", null, (C.pricingAddon && C.pricingAddon.length ? C.pricingAddon : ["Expert calls (Line 02), priority event seats (Line 03), and talent search (Line 04) \u2014 all open to retainer clients."]).map(function (it, i) {
     return /*#__PURE__*/React.createElement("li", {
       key: i
     }, it);
@@ -301,7 +301,7 @@ window.EngagementPage = function EngagementPage({
     className: "ld-title"
   }, lines[1].k), /*#__PURE__*/React.createElement("span", {
     className: "ld-meta"
-  }, lines[1].dividerMeta || "$450 / hr \xB7 retainer clients"))), /*#__PURE__*/React.createElement("section", {
+  }, lines[1].dividerMeta || "Retainer clients only"))), /*#__PURE__*/React.createElement("section", {
     className: "expert-network surface-dark",
     style: {
       background: "var(--ink)",
@@ -352,7 +352,7 @@ window.EngagementPage = function EngagementPage({
     className: "en-rate"
   }, /*#__PURE__*/React.createElement("div", {
     className: "en-rate-num"
-  }, C.enRateNum || "$450 / hr"), /*#__PURE__*/React.createElement("p", null, C.enRateP || "Retainer clients only. No minimum, no commitment, no markup beyond the expert's rate.")), /*#__PURE__*/React.createElement("div", {
+  }, C.enRateNum || "Member rate"), /*#__PURE__*/React.createElement("p", null, C.enRateP || "Retainer clients only. No minimum, no commitment, no markup beyond the expert's rate.")), /*#__PURE__*/React.createElement("div", {
     className: "en-howto"
   }, /*#__PURE__*/React.createElement("div", {
     className: "en-howto-k"

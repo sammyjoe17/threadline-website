@@ -15,7 +15,7 @@ window.ContactPage = function ContactPage({
     role: "",
     company: "",
     revenue: "",
-    interest: "The monthly retainer ($2,000 / mo)",
+    interest: "The monthly retainer",
     note: ""
   };
   const [form, setForm] = useState(empty);
@@ -198,7 +198,7 @@ window.ContactPage = function ContactPage({
   }, /*#__PURE__*/React.createElement("label", null, "What we'd start with"), /*#__PURE__*/React.createElement("select", {
     value: form.interest,
     onChange: e => update("interest", e.target.value)
-  }, /*#__PURE__*/React.createElement("option", null, "The monthly retainer ($2,000 / mo)"), /*#__PURE__*/React.createElement("option", null, "The expert network ($450 / hr, retainer clients)"), /*#__PURE__*/React.createElement("option", null, "Not sure yet \u2014 just a conversation"))), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("option", null, "The monthly retainer"), /*#__PURE__*/React.createElement("option", null, "The expert network (retainer clients)"), /*#__PURE__*/React.createElement("option", null, "Not sure yet \u2014 just a conversation"))), /*#__PURE__*/React.createElement("div", {
     className: "field" + (errors.note ? " has-error" : "")
   }, /*#__PURE__*/React.createElement("label", null, "A bit about where you are"), /*#__PURE__*/React.createElement("textarea", {
     rows: "5",
